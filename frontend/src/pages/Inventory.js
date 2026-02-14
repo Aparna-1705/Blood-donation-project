@@ -1,26 +1,40 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import API from "../services/api";
 
-function Inventory() {
-  const [inventory, setInventory] = useState([]);
+const Inventory = () => {
+  const [stock, setStock] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/inventory')
-      .then(res => setInventory(res.data));
+    loadInventory();
   }, []);
 
+  const loadInventory = async () => {
+    const res = await API.get("/inventory");
+    setStock(res.data);
+  };
+
   return (
-    <div className="container card">
-      <h3>Blood Inventory</h3>
-      <ul>
-        {inventory.map((item, index) => (
-          <li key={index}>
-            {item.bloodGroup} - {item.units} units ({item.hospitalName})
-          </li>
-        ))}
-      </ul>
+    <div className="container mt-5">
+      <h2 className="text-center text-danger">Blood Inventory</h2>
+
+      <table className="table table-bordered table-striped mt-4 text-center">
+        <thead className="table-danger">
+          <tr>
+            <th>Blood Group</th>
+            <th>Units Available</th>
+          </tr>
+        </thead>
+        <tbody>
+          {stock.map((item, i) => (
+            <tr key={i}>
+              <td>{item.bloodGroup}</td>
+              <td>{item.units}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
-}
+};
 
 export default Inventory;

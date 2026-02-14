@@ -46,6 +46,9 @@ app.use("/api/auth", authRoutes);
 app.use("/api/donor", donorRoutes);
 app.use("/api/recipient", recipientRoutes);
 app.use("/api/inventory", inventoryRoutes);
+app.use("/api/inventory", require("./routes/inventoryRoutes"));
+app.use("/api/emergency", require("./routes/emergencyRoutes"));
+app.use("/api/appointment", require("./routes/appointmentRoutes"));
 
 // =======================
 // Socket Connection
