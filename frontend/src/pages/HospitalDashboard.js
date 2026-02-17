@@ -1,26 +1,45 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import "./Dashboard.css";
 
-const HospitalDashboard = () => {
+function HospitalDashboard() {
+  const navigate = useNavigate();
+
   return (
-    <div className="container mt-5">
-      <h2 className="text-center text-danger">Hospital Dashboard</h2>
+    <div className="dashboard-container">
+      <h2 className="dashboard-title">Hospital Dashboard</h2>
 
-      <div className="row mt-4">
-        <PanelCard title="Manage Inventory" />
-        <PanelCard title="Approve Blood Requests" />
-        <PanelCard title="Schedule Donation Camps" />
-        <PanelCard title="View Reports" />
+      <div className="dashboard-grid">
+        <div
+          className="dashboard-card"
+          onClick={() => navigate("/inventory")}
+        >
+          Manage Inventory
+        </div>
+
+        <div
+          className="dashboard-card"
+          onClick={() => navigate("/hospital-approvals")}
+        >
+          Approve Blood Requests
+        </div>
+
+        <div
+          className="dashboard-card"
+          onClick={() => navigate("/analytics")}
+        >
+          View Reports
+        </div>
+
+        <div
+          className="dashboard-card"
+          onClick={() => navigate("/schedule-campaign")}
+        >
+          Schedule Donation Camps
+        </div>
       </div>
     </div>
   );
-};
-
-const PanelCard = ({ title }) => (
-  <div className="col-md-3 mb-4">
-    <div className="card shadow text-center p-4">
-      <h5>{title}</h5>
-    </div>
-  </div>
-);
+}
 
 export default HospitalDashboard;

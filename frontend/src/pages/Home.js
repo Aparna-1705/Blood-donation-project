@@ -1,12 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
 const Home = () => {
   return (
     <>
-      <Navbar />
+     
 
       {/* Hero Section */}
       <div
@@ -72,7 +71,7 @@ const Home = () => {
           <Feature title="Appointment Scheduling" desc="Schedule donation appointments"
             link="/appointments" />
 
-          <Feature title="Find Donors" desc="Search donors by blood group & location"
+         <Feature title="Find Donors" desc="Search donors by blood group & location"
             link="/search-donor" />
 
           <Feature title="Admin Panel" desc="Manage donors, recipients, hospitals & reports"
@@ -81,8 +80,7 @@ const Home = () => {
           <Feature title="Hospital Dashboard" desc="Manage inventory & fulfill requests"
             link="/hospital" />
 
-          <Feature title="Reports & Analytics" desc="Monitor donation trends & availability"
-            link="/reports" />
+         
 
         </div>
       </div>

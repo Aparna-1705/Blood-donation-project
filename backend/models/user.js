@@ -19,10 +19,10 @@ const userSchema = new mongoose.Schema({
     required: true
   },
   role: {
-    type: String,
-    enum: ["donor", "recipient", "hospital"],
-    default: "donor"
-  },
+  type: String,
+  enum: ["donor", "recipient", "hospital", "admin"],
+  required: true
+},
   phone: {
     type: String
   },

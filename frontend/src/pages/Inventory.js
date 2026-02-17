@@ -2,22 +2,26 @@ import React, { useEffect, useState } from "react";
 import API from "../services/api";
 
 const Inventory = () => {
-  const [stock, setStock] = useState([]);
+  const [inventory, setInventory] = useState([]);
 
   useEffect(() => {
-    loadInventory();
+    fetchInventory();
   }, []);
 
-  const loadInventory = async () => {
-    const res = await API.get("/inventory");
-    setStock(res.data);
+  const fetchInventory = async () => {
+    try {
+      const res = await API.get("/inventory");
+      setInventory(res.data);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
-    <div className="container mt-5">
-      <h2 className="text-center text-danger">Blood Inventory</h2>
+    <div className="container mt-4">
+      <h3 className="text-danger text-center mb-4">Blood Inventory</h3>
 
-      <table className="table table-bordered table-striped mt-4 text-center">
+      <table className="table table-bordered table-striped">
         <thead className="table-danger">
           <tr>
             <th>Blood Group</th>
@@ -25,8 +29,8 @@ const Inventory = () => {
           </tr>
         </thead>
         <tbody>
-          {stock.map((item, i) => (
-            <tr key={i}>
+          {inventory.map((item) => (
+            <tr key={item._id}>
               <td>{item.bloodGroup}</td>
               <td>{item.units}</td>
             </tr>

@@ -1,71 +1,38 @@
-const express = require("express");
-const http = require("http");
-const cors = require("cors");
-const mongoose = require("mongoose");
-const dotenv = require("dotenv");
-const socketio = require("socket.io");
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+import mongoose from "mongoose";
 
+import authRoutes from "./routes/authRoutes.js";
+import donorRoutes from "./routes/donorRoutes.js";
+import recipientRoutes from "./routes/recipientRoutes.js";
+import hospitalRoutes from "./routes/hospitalRoutes.js";
+import campaignRoutes from "./routes/campaignRoutes.js";
+import bloodRequestRoutes from "./routes/bloodRequestRoutes.js";
+import adminRoutes from "./routes/adminRoutes.js";
+import inventoryRoutes from "./routes/inventoryRoutes.js"
 dotenv.config();
 
 const app = express();
-const server = http.createServer(app);
-const io = socketio(server, {
-  cors: {
-    origin: "*",
-    methods: ["GET", "POST"]
-  }
-});
 
 app.use(cors());
 app.use(express.json());
 
-// =======================
-// MongoDB Connection
-// =======================
+// API routes
+app.use("/api/auth", authRoutes);
+app.use("/api/donors", donorRoutes);
+app.use("/api/recipients", recipientRoutes);
+app.use("/api/hospitals", hospitalRoutes);
+app.use("/api/campaigns", campaignRoutes);
+app.use("/api/blood-requests", bloodRequestRoutes);
+app.use("/api/admin", adminRoutes);
+app.use("/api/inventory", inventoryRoutes);
+
+
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => console.log("MongoDB Connected"))
-  .catch((err) => console.log("MongoDB Error:", err));
+  .catch((err) => console.error("MongoDB Error:", err));
 
-// =======================
-// Import Routes
-// =======================
-const adminRoutes = require("./routes/adminRoutes");
-const authRoutes = require("./routes/authRoutes");
-const donorRoutes = require("./routes/donorRoutes");
-const recipientRoutes = require("./routes/recipientRoutes");
-
-// Inventory routes require socket instance
-const inventoryRoutes = require("./routes/inventoryRoutes")(io);
-
-// =======================
-// API Routes
-// =======================
-app.use("/api/admin", adminRoutes);
-app.use("/api/auth", authRoutes);
-app.use("/api/donor", donorRoutes);
-app.use("/api/recipient", recipientRoutes);
-app.use("/api/inventory", inventoryRoutes);
-app.use("/api/inventory", require("./routes/inventoryRoutes"));
-app.use("/api/emergency", require("./routes/emergencyRoutes"));
-app.use("/api/appointment", require("./routes/appointmentRoutes"));
-
-// =======================
-// Socket Connection
-// =======================
-io.on("connection", (socket) => {
-  console.log("New Client Connected");
-
-  socket.on("disconnect", () => {
-    console.log("Client Disconnected");
-  });
-});
-
-// =======================
-// Server Start
-// =======================
 const PORT = process.env.PORT || 5000;
-
-server.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

@@ -1,0 +1,36 @@
+.admin-container {
+  padding: 40px;
+  text-align: center;
+  background: #f8f9fc;
+  min-height: 100vh;
+}
+
+.title {
+  font-size: 32px;
+  color: #e63946;
+  margin-bottom: 40px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.card {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  background: #ffe5e5;
+}

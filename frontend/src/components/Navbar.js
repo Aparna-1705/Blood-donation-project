@@ -1,40 +1,48 @@
-import { Link, useNavigate } from "react-router-dom";
+import React from "react";
+import { Link } from "react-router-dom";
+import "./Navbar.css";
 
-function Navbar() {
-  const navigate = useNavigate();
-  const user = JSON.parse(localStorage.getItem("user"));
-
-  const logout = () => {
-    localStorage.clear();
-    navigate("/");
-  };
-
+const Navbar = () => {
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-danger">
-      <div className="container">
-        <Link className="navbar-brand" to="/dashboard">
-          🩸 Blood Donation System
-        </Link>
-
-        <div className="collapse navbar-collapse">
-          <ul className="navbar-nav ms-auto">
-            {user && (
-              <>
-                <li className="nav-item">
-                  <span className="nav-link">Welcome, {user.name}</span>
-                </li>
-                <li className="nav-item">
-                  <button onClick={logout} className="btn btn-light btn-sm">
-                    Logout
-                  </button>
-                </li>
-              </>
-            )}
-          </ul>
-        </div>
+    <nav className="navbar">
+      <div className="nav-logo">
+        <h2>Blood Donation System</h2>
       </div>
+
+      <ul className="nav-links">
+        <li>
+          <Link to="/">Home</Link>
+        </li>
+
+        <li>
+          <Link to="/dashboard">Dashboard</Link>
+        </li>
+
+        <li>
+          <Link to="/find-donor">Find Donor</Link>
+        </li>
+
+        <li>
+          <Link to="/inventory">Inventory</Link>
+        </li>
+
+        <li>
+          <Link to="/appointments">Appointments</Link>
+        </li>
+
+        <li>
+          <Link to="/login">Login</Link>
+        </li>
+
+        <li>
+          <Link to="/register">Register</Link>
+        </li>
+        <li>
+          <Link to="/campaign-table">Campaign Table</Link>
+        </li>
+      </ul>
     </nav>
   );
-}
+};
 
 export default Navbar;
