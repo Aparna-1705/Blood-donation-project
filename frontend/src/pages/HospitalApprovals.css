@@ -1,34 +1,167 @@
-.approval-container {
-  padding: 30px;
+.ha-page {
+  min-height: 100vh;
+  padding: 32px 20px;
+  background: linear-gradient(135deg, #f8fcff 0%, #eaf3ff 100%);
 }
 
-.approval-table {
+.ha-card {
+  max-width: 1100px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 12px 32px rgba(20, 30, 80, 0.12);
+  padding: 24px;
+}
+
+.ha-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.ha-header h2 {
+  margin: 0;
+  color: #c62828;
+}
+
+.ha-count {
+  background: #e3f2fd;
+  color: #0d47a1;
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.ha-info {
+  text-align: center;
+  color: #4f5b7a;
+  margin: 18px 0;
+}
+
+.ha-error {
+  text-align: center;
+  color: #c62828;
+  font-weight: 600;
+  margin: 18px 0;
+}
+
+.ha-table-wrap {
+  overflow-x: auto;
+}
+
+.ha-table {
   width: 100%;
   border-collapse: collapse;
-  background: white;
 }
 
-.approval-table th,
-.approval-table td {
+.ha-table thead th {
+  background: #f3f5ff;
+  color: #2b3352;
+  text-align: left;
   padding: 12px;
-  border: 1px solid #ddd;
-  text-align: center;
+  border-bottom: 1px solid #dde3f3;
 }
 
-.approval-table th {
-  background: #c62828;
-  color: white;
+.ha-table tbody td {
+  padding: 12px;
+  border-bottom: 1px solid #eef1fa;
 }
 
-.approve-btn {
-  background: #2e7d32;
-  color: white;
+.ha-table tbody tr:hover {
+  background: #fafbff;
+}
+
+.ha-badge {
+  display: inline-block;
+  background: #ffebee;
+  color: #b71c1c;
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.ha-status {
+  display: inline-block;
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-weight: 700;
+  font-size: 12px;
+}
+
+.ha-status.pending {
+  background: #fff8e1;
+  color: #a16b00;
+}
+
+.ha-status.approved {
+  background: #e8f5e9;
+  color: #1b5e20;
+}
+
+.ha-status.rejected {
+  background: #ffebee;
+  color: #b71c1c;
+}
+
+.ha-approve-btn {
   border: none;
-  padding: 6px 12px;
-  border-radius: 4px;
+  border-radius: 8px;
+  padding: 8px 14px;
+  background: #2e7d32;
+  color: #fff;
+  font-weight: 600;
   cursor: pointer;
 }
 
-.approve-btn:hover {
+.ha-approve-btn:hover {
   background: #1b5e20;
+}
+
+.ha-reject-btn {
+  border: none;
+  border-radius: 8px;
+  padding: 8px 14px;
+  background: #c62828;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.ha-reject-btn:hover {
+  background: #b71c1c;
+}
+
+.ha-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.ha-section-title {
+  margin: 18px 0 10px;
+  color: #2b3352;
+  font-size: 18px;
+}
+
+.ha-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ha-toggle-btn {
+  border: none;
+  border-radius: 8px;
+  padding: 8px 12px;
+  background: #0d47a1;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.ha-toggle-btn:hover {
+  background: #0b3b85;
 }

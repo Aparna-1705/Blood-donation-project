@@ -1,0 +1,141 @@
+.br-page {
+  min-height: 100vh;
+  padding: 32px 20px;
+  background: linear-gradient(135deg, #f9fbff 0%, #eef2ff 100%);
+}
+
+.br-card {
+  max-width: 1100px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 12px 32px rgba(20, 30, 80, 0.12);
+  padding: 24px;
+}
+
+.br-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.br-header h2 {
+  margin: 0;
+  color: #c62828;
+}
+
+.br-count {
+  background: #e3f2fd;
+  color: #0d47a1;
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.br-info {
+  text-align: center;
+  color: #4f5b7a;
+  margin: 18px 0;
+}
+
+.br-error {
+  text-align: center;
+  color: #c62828;
+  font-weight: 600;
+  margin: 18px 0;
+}
+
+.br-table-wrap {
+  overflow-x: auto;
+}
+
+.br-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.br-table thead th {
+  background: #f3f5ff;
+  color: #2b3352;
+  text-align: left;
+  padding: 12px;
+  border-bottom: 1px solid #dde3f3;
+}
+
+.br-table tbody td {
+  padding: 12px;
+  border-bottom: 1px solid #eef1fa;
+}
+
+.br-table tbody tr:hover {
+  background: #fafbff;
+}
+
+.br-badge {
+  display: inline-block;
+  background: #ffebee;
+  color: #b71c1c;
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.br-status {
+  display: inline-block;
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-weight: 700;
+  font-size: 12px;
+}
+
+.br-status.pending {
+  background: #fff8e1;
+  color: #a16b00;
+}
+
+.br-status.approved {
+  background: #e8f5e9;
+  color: #1b5e20;
+}
+
+.br-status.rejected {
+  background: #ffebee;
+  color: #b71c1c;
+}
+
+.br-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.br-approve-btn {
+  border: none;
+  border-radius: 8px;
+  padding: 8px 14px;
+  background: #2e7d32;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.br-approve-btn:hover {
+  background: #1b5e20;
+}
+
+.br-reject-btn {
+  border: none;
+  border-radius: 8px;
+  padding: 8px 14px;
+  background: #c62828;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.br-reject-btn:hover {
+  background: #b71c1c;
+}

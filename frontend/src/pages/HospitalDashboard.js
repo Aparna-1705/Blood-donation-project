@@ -33,6 +33,20 @@ function HospitalDashboard() {
 
         <div
           className="dashboard-card"
+          onClick={() => navigate("/emergency-requests")}
+        >
+          Emergency Requests
+        </div>
+
+        <div
+          className="dashboard-card"
+          onClick={() => navigate("/appointments-list")}
+        >
+          Donor Appointments
+        </div>
+
+        <div
+          className="dashboard-card"
           onClick={() => navigate("/schedule-campaign")}
         >
           Schedule Donation Camps

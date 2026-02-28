@@ -1,0 +1,91 @@
+.an-page {
+  min-height: 100vh;
+  padding: 32px 20px;
+  background:
+    linear-gradient(rgba(246, 247, 255, 0.88), rgba(246, 247, 255, 0.88)),
+    url("https://images.pexels.com/photos/3786157/pexels-photo-3786157.jpeg");
+  background-size: cover;
+  background-position: center;
+}
+
+.an-wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 14px 36px rgba(26, 42, 97, 0.12);
+  padding: 24px;
+}
+
+.an-wrap h2 {
+  margin: 0 0 18px;
+  color: #c62828;
+}
+
+.an-info {
+  color: #4f5b7a;
+}
+
+.an-error {
+  color: #c62828;
+  font-weight: 600;
+}
+
+.an-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(180px, 1fr));
+  gap: 14px;
+}
+
+.an-stat-card {
+  border-radius: 12px;
+  padding: 18px;
+  color: #fff;
+}
+
+.an-stat-card h3 {
+  margin: 6px 0 0;
+  font-size: 28px;
+}
+
+.an-label {
+  margin: 0;
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.an-stat-card.donors {
+  background: linear-gradient(135deg, #0d47a1, #1565c0);
+}
+
+.an-stat-card.recipients {
+  background: linear-gradient(135deg, #6a1b9a, #8e24aa);
+}
+
+.an-stat-card.units {
+  background: linear-gradient(135deg, #2e7d32, #388e3c);
+}
+
+.an-report-card {
+  margin-top: 16px;
+  border: 1px solid #e0e6f4;
+  border-radius: 12px;
+  padding: 16px;
+  background: #fafcff;
+}
+
+.an-report-card h4 {
+  margin: 0 0 10px;
+  color: #2b3352;
+}
+
+.an-report-card p {
+  margin: 8px 0;
+  color: #4f5b7a;
+}
+
+@media (max-width: 768px) {
+  .an-grid {
+    grid-template-columns: 1fr;
+  }
+}

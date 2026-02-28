@@ -1,0 +1,102 @@
+.cp-page {
+  min-height: 100vh;
+  padding: 32px 20px;
+  background: linear-gradient(135deg, #fff8f8 0%, #ffeef0 100%);
+}
+
+.cp-card {
+  max-width: 1150px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 12px 32px rgba(90, 20, 30, 0.12);
+  padding: 24px;
+}
+
+.cp-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.cp-header h2 {
+  margin: 0;
+  color: #c62828;
+}
+
+.cp-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cp-count {
+  background: #ffebee;
+  color: #b71c1c;
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.cp-new-btn {
+  border: none;
+  border-radius: 8px;
+  padding: 8px 14px;
+  background: #c62828;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.cp-new-btn:hover {
+  background: #b71c1c;
+}
+
+.cp-info {
+  text-align: center;
+  color: #4f5b7a;
+  margin: 18px 0;
+}
+
+.cp-error {
+  text-align: center;
+  color: #c62828;
+  font-weight: 600;
+  margin: 18px 0;
+}
+
+.cp-table-wrap {
+  overflow-x: auto;
+}
+
+.cp-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.cp-table thead th {
+  background: #fff0f1;
+  color: #5f1d24;
+  text-align: left;
+  padding: 12px;
+  border-bottom: 1px solid #f2d2d6;
+}
+
+.cp-table tbody td {
+  padding: 12px;
+  border-bottom: 1px solid #f8e7e9;
+}
+
+.cp-table tbody tr:hover {
+  background: #fffafb;
+}
+
+@media (max-width: 768px) {
+  .cp-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

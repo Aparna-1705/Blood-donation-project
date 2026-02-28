@@ -9,7 +9,7 @@ const FindDonor = () => {
   useEffect(() => {
     const fetchDonors = async () => {
       try {
-        const res = await API.get("/donor");
+        const res = await API.get("/donors");
         setDonors(res.data);
         setLoading(false);
       } catch (err) {
@@ -40,7 +40,7 @@ const FindDonor = () => {
               <h5 className="text-primary">{d.name}</h5>
               <p><strong>Blood Group:</strong> {d.bloodGroup}</p>
               <p><strong>Phone:</strong> {d.phone}</p>
-              <p><strong>Location:</strong> {d.address}</p>
+              <p><strong>Location:</strong> {d.address || d.city}</p>
             </div>
           </div>
         ))}

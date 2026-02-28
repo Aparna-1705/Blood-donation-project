@@ -18,16 +18,24 @@ const AdminDashboard = () => {
           Manage Recipients
         </div>
 
-        <div className="card" onClick={() => navigate("/hospital-approvals")}>
-          Hospital Approvals
+        <div className="card" onClick={() => navigate("/blood-request-approvals")}>
+          Blood Request Approvals
         </div>
 
         <div className="card" onClick={() => navigate("/blood-stock")}>
           Blood Stock Reports
         </div>
 
+        <div className="card" onClick={() => navigate("/emergency-requests")}>
+          Emergency Requests
+        </div>
+
         <div className="card" onClick={() => navigate("/campaigns")}>
           Donation Campaigns
+        </div>
+
+        <div className="card" onClick={() => navigate("/appointments-list")}>
+          Donor Appointments
         </div>
 
         <div className="card" onClick={() => navigate("/analytics")}>

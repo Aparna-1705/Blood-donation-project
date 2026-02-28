@@ -1,0 +1,81 @@
+.inv-page {
+  min-height: 100vh;
+  padding: 32px 20px;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.88)),
+    url("https://images.pexels.com/photos/3786157/pexels-photo-3786157.jpeg");
+  background-size: cover;
+  background-position: center;
+}
+
+.inv-card {
+  max-width: 1100px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 12px 32px rgba(20, 30, 80, 0.12);
+  padding: 24px;
+}
+
+.inv-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.inv-header h2 {
+  margin: 0;
+  color: #c62828;
+}
+
+.inv-count {
+  background: #e3f2fd;
+  color: #0d47a1;
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.inv-info {
+  text-align: center;
+  color: #4f5b7a;
+  margin: 18px 0;
+}
+
+.inv-table-wrap {
+  overflow-x: auto;
+}
+
+.inv-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.inv-table thead th {
+  background: #f3f5ff;
+  color: #2b3352;
+  text-align: left;
+  padding: 12px;
+  border-bottom: 1px solid #dde3f3;
+}
+
+.inv-table tbody td {
+  padding: 12px;
+  border-bottom: 1px solid #eef1fa;
+}
+
+.inv-table tbody tr:hover {
+  background: #fafbff;
+}
+
+.inv-badge {
+  display: inline-block;
+  background: #ffebee;
+  color: #b71c1c;
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-weight: 700;
+  font-size: 13px;
+}

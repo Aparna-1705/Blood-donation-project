@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import API from "../services/api";
+import "./Inventory.css";
 
 const Inventory = () => {
   const [inventory, setInventory] = useState([]);
@@ -11,32 +12,45 @@ const Inventory = () => {
   const fetchInventory = async () => {
     try {
       const res = await API.get("/inventory");
-      setInventory(res.data);
+      setInventory(Array.isArray(res.data) ? res.data : []);
     } catch (err) {
       console.error(err);
     }
   };
 
   return (
-    <div className="container mt-4">
-      <h3 className="text-danger text-center mb-4">Blood Inventory</h3>
+    <div className="inv-page">
+      <div className="inv-card">
+        <div className="inv-header">
+          <h2>Blood Inventory</h2>
+          <span className="inv-count">{inventory.length} Groups</span>
+        </div>
 
-      <table className="table table-bordered table-striped">
-        <thead className="table-danger">
-          <tr>
-            <th>Blood Group</th>
-            <th>Units Available</th>
-          </tr>
-        </thead>
-        <tbody>
-          {inventory.map((item) => (
-            <tr key={item._id}>
-              <td>{item.bloodGroup}</td>
-              <td>{item.units}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+        {inventory.length === 0 ? (
+          <p className="inv-info">No inventory data found.</p>
+        ) : (
+          <div className="inv-table-wrap">
+            <table className="inv-table">
+              <thead>
+                <tr>
+                  <th>Blood Group</th>
+                  <th>Units Available</th>
+                </tr>
+              </thead>
+              <tbody>
+                {inventory.map((item) => (
+                  <tr key={item._id}>
+                    <td>
+                      <span className="inv-badge">{item.bloodGroup}</span>
+                    </td>
+                    <td>{item.units}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

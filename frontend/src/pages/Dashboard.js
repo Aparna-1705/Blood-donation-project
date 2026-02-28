@@ -7,6 +7,12 @@ const Dashboard = () => {
       <h3 className="text-danger text-center">Dashboard</h3>
 
       <div className="row mt-4">
+        <div className="col-md-3 mb-2">
+          <Link to="/login" className="btn btn-primary w-100">
+            Login
+          </Link>
+        </div>
+
         <div className="col-md-3">
           <Link to="/find-donor" className="btn btn-danger w-100">
             Find Donor

@@ -1,0 +1,84 @@
+.mr-page {
+  min-height: 100vh;
+  padding: 32px 20px;
+  background: linear-gradient(135deg, #fffaf5 0%, #fff1ea 100%);
+}
+
+.mr-card {
+  max-width: 1100px;
+  margin: 0 auto;
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 12px 32px rgba(80, 30, 20, 0.12);
+  padding: 24px;
+}
+
+.mr-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.mr-header h2 {
+  margin: 0;
+  color: #c62828;
+}
+
+.mr-count {
+  background: #fff3e0;
+  color: #bf360c;
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.mr-info {
+  text-align: center;
+  color: #6b5b4f;
+  margin: 18px 0;
+}
+
+.mr-error {
+  text-align: center;
+  color: #c62828;
+  font-weight: 600;
+  margin: 18px 0;
+}
+
+.mr-table-wrap {
+  overflow-x: auto;
+}
+
+.mr-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.mr-table thead th {
+  background: #fff5f0;
+  color: #5c2a18;
+  text-align: left;
+  padding: 12px;
+  border-bottom: 1px solid #f0dacf;
+}
+
+.mr-table tbody td {
+  padding: 12px;
+  border-bottom: 1px solid #f6ebe5;
+}
+
+.mr-table tbody tr:hover {
+  background: #fffdfc;
+}
+
+.mr-badge {
+  display: inline-block;
+  background: #ffe0e0;
+  color: #b71c1c;
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-weight: 700;
+  font-size: 13px;
+}

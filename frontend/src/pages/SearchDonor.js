@@ -9,8 +9,8 @@ const SearchDonor = () => {
     if (!bg) return alert("Please select blood group");
 
     try {
-      const res = await API.get(`/donor/search/${bg}`);
-      setDonors(res.data);
+      const res = await API.get(`/donors/search/${bg}`);
+      setDonors(Array.isArray(res.data) ? res.data : []);
     } catch (err) {
       alert("Error fetching donors");
     }
@@ -50,7 +50,7 @@ const SearchDonor = () => {
                     <td>{d.name}</td>
                     <td>{d.bloodGroup}</td>
                     <td>{d.phone}</td>
-                    <td>{d.city}</td>
+                    <td>{d.city || d.address}</td>
                   </tr>
                 ))
               ) : (
@@ -72,7 +72,7 @@ const styles = {
   page: {
     minHeight: "100vh",
     backgroundImage:
-      "url('https://images.unsplash.com/photo-1612277794895-597f93ad1e38')",
+      "url('https://images.pexels.com/photos/3786157/pexels-photo-3786157.jpeg')",
     backgroundSize: "cover",
     backgroundPosition: "center",
   },

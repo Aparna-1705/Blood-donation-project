@@ -1,0 +1,91 @@
+.user-login-page {
+  min-height: 100vh;
+  background-image:
+    linear-gradient(rgba(10, 18, 40, 0.72), rgba(10, 18, 40, 0.72)),
+    url("https://images.pexels.com/photos/3786157/pexels-photo-3786157.jpeg");
+  background-size: cover;
+  background-position: center;
+}
+
+.user-login-overlay {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.user-login-card {
+  width: 100%;
+  max-width: 400px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 28px;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.3);
+}
+
+.user-login-card h3 {
+  margin: 0 0 8px;
+  color: #c62828;
+  text-align: center;
+  font-size: 40px;
+}
+
+.user-login-card p {
+  margin: 0 0 14px;
+  text-align: center;
+  color: #555;
+  font-size: 14px;
+}
+
+.user-login-card input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 12px;
+  border: 1px solid #d0d0d0;
+  border-radius: 6px;
+}
+
+.user-login-card select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 12px;
+  border: 1px solid #d0d0d0;
+  border-radius: 6px;
+  background: #fff;
+}
+
+.user-login-card button {
+  width: 100%;
+  border: none;
+  border-radius: 6px;
+  padding: 12px;
+  background: #c62828;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.user-login-card button:hover {
+  background: #b71c1c;
+}
+
+.user-login-card button:disabled {
+  opacity: 0.75;
+  cursor: not-allowed;
+}
+
+.user-login-error {
+  background: #ffebee;
+  border: 1px solid #ffcdd2;
+  color: #b71c1c;
+  border-radius: 6px;
+  padding: 8px 10px;
+  margin-bottom: 12px;
+  font-size: 13px;
+}
+
+.user-login-foot {
+  margin-top: 12px;
+  font-size: 13px;
+}

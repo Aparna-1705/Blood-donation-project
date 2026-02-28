@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import API from "../services/api";
 
+const BLOOD_GROUPS = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
+
 const RecipientRegister = () => {
   const [form, setForm] = useState({
     name: "",
@@ -10,16 +12,60 @@ const RecipientRegister = () => {
     phone: "",
     city: "",
   });
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+    if (error) setError("");
+  };
+
+  const validate = () => {
+    const name = form.name.trim();
+    const hospital = form.hospital.trim();
+    const bloodGroup = form.bloodGroup.trim().toUpperCase();
+    const unitsRequired = Number(form.unitsRequired);
+    const phone = form.phone.trim();
+    const city = form.city.trim();
+
+    if (!name || !hospital || !bloodGroup || !form.unitsRequired || !phone || !city) {
+      return "All fields are required";
+    }
+    if (name.length < 2 || name.length > 60) {
+      return "Name must be between 2 and 60 characters";
+    }
+    if (hospital.length < 2 || hospital.length > 80) {
+      return "Hospital must be between 2 and 80 characters";
+    }
+    if (!BLOOD_GROUPS.includes(bloodGroup)) {
+      return "Select a valid blood group";
+    }
+    if (!Number.isInteger(unitsRequired) || unitsRequired < 1 || unitsRequired > 20) {
+      return "Units required must be between 1 and 20";
+    }
+    if (!/^\d{10,15}$/.test(phone)) {
+      return "Phone must contain 10 to 15 digits";
+    }
+    if (city.length < 2 || city.length > 60) {
+      return "City must be between 2 and 60 characters";
+    }
+
+    return "";
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
+    setSuccess("");
+    const validationError = validate();
+    if (validationError) {
+      setError(validationError);
+      return;
+    }
+
     try {
-      await API.post("/recipient/register", form);
-      alert("Recipient Registered Successfully");
+      await API.post("/recipients/register", form);
+      setSuccess("Recipient registered successfully");
       setForm({
         name: "",
         hospital: "",
@@ -29,7 +75,7 @@ const RecipientRegister = () => {
         city: "",
       });
     } catch (err) {
-      alert("Registration Failed");
+      setError(err.response?.data?.message || "Registration failed");
     }
   };
 
@@ -38,6 +84,8 @@ const RecipientRegister = () => {
       <div style={styles.overlay}>
         <div style={styles.formContainer}>
           <h2 style={styles.heading}>Blood Request Registration</h2>
+          {error && <p style={styles.error}>{error}</p>}
+          {success && <p style={styles.success}>{success}</p>}
 
           <form onSubmit={handleSubmit}>
             <input style={styles.input} type="text" name="name" placeholder="Patient Name" required value={form.name} onChange={handleChange} />
@@ -46,13 +94,14 @@ const RecipientRegister = () => {
 
             <select style={styles.input} name="bloodGroup" required value={form.bloodGroup} onChange={handleChange}>
               <option value="">Blood Group</option>
-              <option>A+</option><option>A-</option>
-              <option>B+</option><option>B-</option>
-              <option>AB+</option><option>AB-</option>
-              <option>O+</option><option>O-</option>
+              {BLOOD_GROUPS.map((group) => (
+                <option key={group} value={group}>
+                  {group}
+                </option>
+              ))}
             </select>
 
-            <input style={styles.input} type="number" name="unitsRequired" placeholder="Units Required" required value={form.unitsRequired} onChange={handleChange} />
+            <input style={styles.input} type="number" min="1" max="20" name="unitsRequired" placeholder="Units Required" required value={form.unitsRequired} onChange={handleChange} />
 
             <input style={styles.input} type="tel" name="phone" placeholder="Contact Number" required value={form.phone} onChange={handleChange} />
 
@@ -98,6 +147,16 @@ const styles = {
     textAlign: "center",
     marginBottom: "20px",
     color: "#c62828",
+  },
+  error: {
+    color: "#c62828",
+    textAlign: "center",
+    marginBottom: "10px",
+  },
+  success: {
+    color: "#2e7d32",
+    textAlign: "center",
+    marginBottom: "10px",
   },
 
   input: {

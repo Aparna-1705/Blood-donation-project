@@ -1,12 +1,16 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import API from "../services/api";
+import "./Login.css";
 
 function Login() {
   const [form, setForm] = useState({
     email: "",
     password: "",
+    role: "donor",
   });
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -16,49 +20,71 @@ function Login() {
 
   const submit = async (e) => {
     e.preventDefault();
+    setError("");
+    setLoading(true);
 
     try {
       const res = await API.post("/auth/login", form);
-
-      alert("Login Successful");
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("user", JSON.stringify(res.data.user));
 
-      navigate("/");
+      navigate("/home");
     } catch (err) {
-      alert(err.response?.data?.message || "Login Failed");
+      setError(err.response?.data?.message || "Login failed");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div style={styles.page}>
-      <div style={styles.overlay}>
-        <div style={styles.card}>
-          <h3 style={styles.heading}>Blood Donation Login</h3>
+    <div className="user-login-page">
+      <div className="user-login-overlay">
+        <div className="user-login-card">
+          <h3>Login Page</h3>
+          <p>Sign in with your registered account to open the dashboard.</p>
+
+          {error && <div className="user-login-error">{error}</div>}
 
           <form onSubmit={submit}>
             <input
-              style={styles.input}
-              type="email"
+              type="text"
               name="email"
-              placeholder="Email"
+              placeholder="Enter your email / username"
+              value={form.email}
               onChange={handleChange}
               required
             />
 
             <input
-              style={styles.input}
               type="password"
               name="password"
               placeholder="Password"
+              value={form.password}
               onChange={handleChange}
               required
             />
 
-            <button style={styles.button}>Login</button>
+            <select
+              name="role"
+              value={form.role}
+              onChange={handleChange}
+              required
+            >
+              <option value="donor">Donor</option>
+              <option value="recipient">Recipient</option>
+              <option value="hospital">Hospital</option>
+            </select>
+
+            <button type="submit" disabled={loading}>
+              {loading ? "Signing In..." : "Login"}
+            </button>
           </form>
 
-          <p style={{ textAlign: "center", marginTop: "10px" }}>
+          <p className="user-login-foot">
+            Admin login? <Link to="/admin-login">Go to Admin Login</Link>
+          </p>
+
+          <p className="user-login-foot">
             New User? <Link to="/register">Register</Link>
           </p>
         </div>
@@ -66,51 +92,5 @@ function Login() {
     </div>
   );
 }
-
-const styles = {
-  page: {
-    minHeight: "100vh",
-    backgroundImage:
-      "url('https://images.unsplash.com/photo-1582719478250-c89cae4dc85b')",
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-  },
-  overlay: {
-    minHeight: "100vh",
-    backgroundColor: "rgba(0,0,0,0.65)",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  card: {
-    background: "#fff",
-    padding: "30px",
-    width: "380px",
-    borderRadius: "10px",
-    boxShadow: "0 0 15px rgba(0,0,0,0.4)",
-  },
-  heading: {
-    textAlign: "center",
-    color: "#c62828",
-    marginBottom: "15px",
-  },
-  input: {
-    width: "100%",
-    padding: "10px",
-    marginBottom: "12px",
-    borderRadius: "6px",
-    border: "1px solid #ccc",
-  },
-  button: {
-    width: "100%",
-    padding: "12px",
-    background: "#c62828",
-    color: "#fff",
-    border: "none",
-    borderRadius: "6px",
-    fontSize: "16px",
-    cursor: "pointer",
-  },
-};
 
 export default Login;

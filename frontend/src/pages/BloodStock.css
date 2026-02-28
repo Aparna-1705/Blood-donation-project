@@ -1,0 +1,84 @@
+.bs-page {
+  min-height: 100vh;
+  padding: 32px 20px;
+  background: linear-gradient(135deg, #f9fff8 0%, #ecfff0 100%);
+}
+
+.bs-card {
+  max-width: 1100px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 12px 32px rgba(20, 80, 30, 0.12);
+  padding: 24px;
+}
+
+.bs-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.bs-header h2 {
+  margin: 0;
+  color: #c62828;
+}
+
+.bs-count {
+  background: #e8f5e9;
+  color: #1b5e20;
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.bs-info {
+  text-align: center;
+  color: #4f5b7a;
+  margin: 18px 0;
+}
+
+.bs-error {
+  text-align: center;
+  color: #c62828;
+  font-weight: 600;
+  margin: 18px 0;
+}
+
+.bs-table-wrap {
+  overflow-x: auto;
+}
+
+.bs-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.bs-table thead th {
+  background: #effaf0;
+  color: #235129;
+  text-align: left;
+  padding: 12px;
+  border-bottom: 1px solid #d9eedb;
+}
+
+.bs-table tbody td {
+  padding: 12px;
+  border-bottom: 1px solid #e8f5e9;
+}
+
+.bs-table tbody tr:hover {
+  background: #f8fff8;
+}
+
+.bs-badge {
+  display: inline-block;
+  background: #ffebee;
+  color: #b71c1c;
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-weight: 700;
+  font-size: 13px;
+}

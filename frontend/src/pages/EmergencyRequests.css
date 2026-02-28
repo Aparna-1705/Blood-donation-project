@@ -1,0 +1,32 @@
+.emergency-requests-page,
+.emergency-requests-card {
+  font-family: "Times New Roman", Times, serif;
+}
+
+.emergency-requests-title {
+  font-size: clamp(1.35rem, 2.4vw, 1.9rem);
+  font-weight: 700;
+}
+
+.emergency-requests-refresh {
+  font-size: clamp(0.9rem, 1.05vw, 1rem);
+}
+
+.emergency-requests-message {
+  font-size: clamp(0.95rem, 1.05vw, 1.05rem);
+}
+
+.emergency-requests-table th,
+.emergency-requests-table td {
+  font-size: clamp(0.95rem, 1.15vw, 1.1rem);
+  vertical-align: middle;
+}
+
+.emergency-requests-table th {
+  font-weight: 700;
+}
+
+.emergency-action-btn {
+  font-size: clamp(0.85rem, 0.95vw, 0.95rem);
+  font-family: "Times New Roman", Times, serif;
+}
