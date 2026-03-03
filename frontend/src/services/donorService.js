@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "http://localhost:5000/api/donors",
+  baseURL: "https://blood-donation-project-dxur.onrender.com/api/donors",
 });
 
 // ===============================
