@@ -42,7 +42,7 @@ function CampaignTable() {
 
   const fetchCampaigns = async function () {
     try {
-      const res = await axios.get("http://localhost:5000/api/campaigns");
+      const res = await axios.get("https://blood-donation-project-dxur.onrender.com/api/campaigns");
       setCampaigns(res.data);
       setLoading(false);
     } catch (err) {
