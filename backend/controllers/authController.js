@@ -3,6 +3,11 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 const BLOOD_GROUPS = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
+const AGE_RULES = {
+  donor: { min: 18, max: 65 },
+  recipient: { min: 0, max: 120 },
+  hospital: { min: 0, max: 120 }
+};
 const ALLOWED_REGISTER_ROLES = ["donor", "recipient", "hospital"];
 const ALLOWED_LOGIN_ROLES = ["donor", "recipient", "hospital", "admin"];
 
@@ -58,20 +63,29 @@ const register = async (req, res) => {
       errors.push("Phone number must contain 10 to 15 digits");
     }
 
-    if (!Number.isInteger(normalized.age) || normalized.age < 18 || normalized.age > 65) {
-      errors.push("Age must be a whole number between 18 and 65");
+    if (!ALLOWED_REGISTER_ROLES.includes(normalized.role)) {
+      errors.push("Invalid role selected");
+    }
+
+    if (normalized.role !== "hospital") {
+      const ageRule = AGE_RULES[normalized.role] || AGE_RULES.donor;
+      if (
+        !Number.isInteger(normalized.age) ||
+        normalized.age < ageRule.min ||
+        normalized.age > ageRule.max
+      ) {
+        errors.push(`Age must be a whole number between ${ageRule.min} and ${ageRule.max}`);
+      }
     }
 
     if (normalized.address.length < 5 || normalized.address.length > 120) {
       errors.push("Address must be between 5 and 120 characters");
     }
 
-    if (!BLOOD_GROUPS.includes(normalized.bloodGroup)) {
-      errors.push("Select a valid blood group");
-    }
-
-    if (!ALLOWED_REGISTER_ROLES.includes(normalized.role)) {
-      errors.push("Invalid role selected");
+    if (normalized.role !== "hospital") {
+      if (!BLOOD_GROUPS.includes(normalized.bloodGroup)) {
+        errors.push("Select a valid blood group");
+      }
     }
 
     if (errors.length) {
@@ -90,9 +104,9 @@ const register = async (req, res) => {
       email: normalized.email,
       password: hashed,
       phone: normalized.phone,
-      age: normalized.age,
+      age: normalized.role === "hospital" ? undefined : normalized.age,
       address: normalized.address,
-      bloodGroup: normalized.bloodGroup,
+      bloodGroup: normalized.role === "hospital" ? undefined : normalized.bloodGroup,
       role: normalized.role
     });
 
@@ -107,6 +121,7 @@ const register = async (req, res) => {
 const login = async (req, res) => {
   try {
     const identifier = String(req.body?.email || "").trim();
+    const normalizedIdentifier = identifier.replace(/\s+/g, " ");
     const normalizedEmail = identifier.toLowerCase();
     const password = String(req.body?.password || "");
     const role = String(req.body?.role || "").trim().toLowerCase();
@@ -120,6 +135,10 @@ const login = async (req, res) => {
     }
 
     const escapedIdentifier = identifier.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const escapedNormalizedIdentifier = normalizedIdentifier.replace(
+      /[.*+?^${}()|[\]\\]/g,
+      "\\$&"
+    );
     let user = null;
 
     if (/^\S+@\S+\.\S+$/.test(normalizedEmail)) {
@@ -132,6 +151,12 @@ const login = async (req, res) => {
     if (!user) {
       user = await User.findOne({
         name: { $regex: `^${escapedIdentifier}$`, $options: "i" }
+      });
+    }
+
+    if (!user && escapedNormalizedIdentifier !== escapedIdentifier) {
+      user = await User.findOne({
+        name: { $regex: `^${escapedNormalizedIdentifier}$`, $options: "i" }
       });
     }
 

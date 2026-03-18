@@ -11,8 +11,11 @@ const CoreFeatures = () => {
     userRole = "";
   }
 
-  const isDonor = String(userRole).toLowerCase() === "donor";
-  const isHospital = String(userRole).toLowerCase() === "hospital";
+  const normalizedRole = String(userRole).toLowerCase();
+  const isDonor = normalizedRole === "donor";
+  const isHospital = normalizedRole === "hospital";
+  const isAdmin = normalizedRole === "admin";
+  const appointmentLink = isAdmin ? "/appointments-list" : "/appointments";
 
   return (
     <section className="feature-section">
@@ -49,7 +52,7 @@ const CoreFeatures = () => {
           <Feature
             title="Appointment Scheduling"
             desc="Schedule donation appointments."
-            link="/appointments"
+            link={appointmentLink}
             tone="appointment"
           />
           <Feature
@@ -58,7 +61,7 @@ const CoreFeatures = () => {
             link="/search-donor"
             tone="find"
           />
-          {!isHospital && (
+          {!isHospital && !isAdmin && !isDonor && (
             <Feature
               title="Admin Panel"
               desc="Manage donors, recipients, hospitals, and reports."
@@ -80,6 +83,45 @@ const CoreFeatures = () => {
             link="/analytics"
             tone="analytics"
           />
+          {isAdmin && (
+            <>
+              <Feature
+                title="Manage Donors"
+                desc="Review and manage donor profiles."
+                link="/manage-donors"
+                tone="admin"
+                cta="Manage"
+              />
+              <Feature
+                title="Manage Recipients"
+                desc="Review and manage recipient records."
+                link="/manage-recipients"
+                tone="admin"
+                cta="Manage"
+              />
+              <Feature
+                title="Blood Request Approvals"
+                desc="Approve or reject incoming blood requests."
+                link="/blood-request-approvals"
+                tone="admin"
+                cta="Review"
+              />
+              <Feature
+                title="Blood Stock Reports"
+                desc="View stock reports across blood groups."
+                link="/blood-stock"
+                tone="admin"
+                cta="View Reports"
+              />
+              <Feature
+                title="Donation Campaigns"
+                desc="Plan and manage donation campaigns."
+                link="/campaigns"
+                tone="admin"
+                cta="Manage"
+              />
+            </>
+          )}
         </div>
       </div>
     </section>

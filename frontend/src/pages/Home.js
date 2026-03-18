@@ -167,7 +167,10 @@ const Home = () => {
               <div className="feature-card">
                 <h3>Appointment Scheduling</h3>
                 <p>Schedule donation appointments.</p>
-                <Link to="/appointments" className="feature-btn">
+                <Link
+                  to={isAdmin ? "/appointments-list" : "/appointments"}
+                  className="feature-btn"
+                >
                   Explore
                 </Link>
               </div>
@@ -181,7 +184,7 @@ const Home = () => {
                 </Link>
               </div>
             )}
-            {isAdmin && (
+            {!isAdmin && !isDonor && !isRecipient && (
               <div className="feature-card">
                 <h3>Admin Panel</h3>
                 <p>Manage donors, recipients, hospitals, and reports.</p>
@@ -206,6 +209,45 @@ const Home = () => {
                 Explore
               </Link>
             </div>
+            {isAdmin && (
+              <>
+                <div className="feature-card">
+                  <h3>Manage Donors</h3>
+                  <p>Review and manage donor profiles.</p>
+                  <Link to="/manage-donors" className="feature-btn">
+                    Manage
+                  </Link>
+                </div>
+                <div className="feature-card">
+                  <h3>Manage Recipients</h3>
+                  <p>Review and manage recipient records.</p>
+                  <Link to="/manage-recipients" className="feature-btn">
+                    Manage
+                  </Link>
+                </div>
+                <div className="feature-card">
+                  <h3>Blood Request Approvals</h3>
+                  <p>Approve or reject incoming blood requests.</p>
+                  <Link to="/blood-request-approvals" className="feature-btn">
+                    Review
+                  </Link>
+                </div>
+                <div className="feature-card">
+                  <h3>Blood Stock Reports</h3>
+                  <p>View stock reports across blood groups.</p>
+                  <Link to="/blood-stock" className="feature-btn">
+                    View Reports
+                  </Link>
+                </div>
+                <div className="feature-card">
+                  <h3>Donation Campaigns</h3>
+                  <p>Plan and manage donation campaigns.</p>
+                  <Link to="/campaigns" className="feature-btn">
+                    Manage
+                  </Link>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </section>

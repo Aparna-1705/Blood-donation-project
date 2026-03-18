@@ -35,7 +35,7 @@ function AdminLogin() {
 
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("user", JSON.stringify(user));
-      navigate("/home");
+      navigate("/admin");
     } catch (err) {
       setError(err.response?.data?.message || "Admin login failed");
     } finally {

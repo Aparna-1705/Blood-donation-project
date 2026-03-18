@@ -1,12 +1,19 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./Navbar.css";
 
 const Navbar = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const hideAuthLinks = location.pathname === "/core-features";
-  const hideNavbarRoutes = ["/login"];
+  const hideNavbarRoutes = ["/login", "/admin-login", "/register"];
   const isLoggedIn = Boolean(localStorage.getItem("token"));
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    navigate("/login");
+  };
 
   if (hideNavbarRoutes.includes(location.pathname)) {
     return null;
@@ -21,13 +28,7 @@ const Navbar = () => {
       <ul className="nav-links">
         <li>
           <Link to="/home" className={isLoggedIn ? "home-icon-link" : ""}>
-            {isLoggedIn ? (
-              <span className="home-icon" aria-label="Home" title="Home">
-                &#8962;
-              </span>
-            ) : (
-              "Home"
-            )}
+            Home
           </Link>
         </li>
 
@@ -46,6 +47,18 @@ const Navbar = () => {
         {!isLoggedIn && !hideAuthLinks && (
           <li>
             <Link to="/register">Register</Link>
+          </li>
+        )}
+
+        {isLoggedIn && (
+          <li>
+            <button
+              type="button"
+              className="logout-button"
+              onClick={handleLogout}
+            >
+              Logout
+            </button>
           </li>
         )}
       </ul>

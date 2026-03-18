@@ -138,7 +138,14 @@ function App() {
         <Route path="/donor-register" element={<DonorRegister />} />
         <Route path="/recipient-register" element={<RecipientRegister />} />
 
-        <Route path="/admin" element={<AdminDashboard />} />
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute>
+              <AdminDashboard />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/hospital" element={<HospitalDashboard />} />
         <Route path="/find-donor" element={<FindDonor />} />
         <Route path="/search-donor" element={<SearchDonor />} />

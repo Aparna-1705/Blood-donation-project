@@ -16,7 +16,9 @@ const userSchema = new mongoose.Schema({
   },
   bloodGroup: {
     type: String,
-    required: true
+    required: function () {
+      return this.role !== "hospital";
+    }
   },
   role: {
   type: String,

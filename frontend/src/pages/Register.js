@@ -3,6 +3,11 @@ import { useNavigate, Link } from "react-router-dom";
 import API from "../services/api";
 
 const BLOOD_GROUPS = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
+const AGE_RULES = {
+  donor: { min: 18, max: 65 },
+  recipient: { min: 0, max: 120 },
+  hospital: { min: 0, max: 120 }
+};
 
 function Register() {
   const [form, setForm] = useState({
@@ -20,7 +25,17 @@ function Register() {
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    if (name === "role") {
+      const nextForm = { ...form, role: value };
+      if (value === "hospital") {
+        nextForm.age = "";
+        nextForm.bloodGroup = "";
+      }
+      setForm(nextForm);
+    } else {
+      setForm({ ...form, [name]: value });
+    }
     if (error) setError("");
   };
 
@@ -57,17 +72,30 @@ function Register() {
     if (!/^\d{10,15}$/.test(normalized.phone)) {
       return "Phone number must contain 10 to 15 digits";
     }
-    if (!Number.isInteger(normalized.age) || normalized.age < 18 || normalized.age > 65) {
-      return "Age must be a whole number between 18 and 65";
+    if (normalized.role !== "hospital") {
+      const ageRule = AGE_RULES[normalized.role] || AGE_RULES.donor;
+      if (
+        !Number.isInteger(normalized.age) ||
+        normalized.age < ageRule.min ||
+        normalized.age > ageRule.max
+      ) {
+        return `Age must be a whole number between ${ageRule.min} and ${ageRule.max}`;
+      }
     }
     if (normalized.address.length < 5 || normalized.address.length > 120) {
       return "Address must be between 5 and 120 characters";
     }
-    if (!BLOOD_GROUPS.includes(normalized.bloodGroup)) {
-      return "Select a valid blood group";
+    if (normalized.role !== "hospital") {
+      if (!BLOOD_GROUPS.includes(normalized.bloodGroup)) {
+        return "Select a valid blood group";
+      }
     }
     if (!["donor", "recipient", "hospital"].includes(normalized.role)) {
       return "Invalid role selected";
+    }
+
+    if (normalized.role === "hospital") {
+      return "";
     }
 
     return "";
@@ -138,17 +166,19 @@ function Register() {
               onChange={handleChange}
             />
 
-            <input
-              style={styles.input}
-              name="age"
-              type="number"
-              min="18"
-              max="65"
-              placeholder="Age"
-              required
-              value={form.age}
-              onChange={handleChange}
-            />
+            {form.role !== "hospital" && (
+              <input
+                style={styles.input}
+                name="age"
+                type="number"
+                min={AGE_RULES[form.role]?.min ?? AGE_RULES.donor.min}
+                max={AGE_RULES[form.role]?.max ?? AGE_RULES.donor.max}
+                placeholder="Age"
+                required
+                value={form.age}
+                onChange={handleChange}
+              />
+            )}
 
             <input
               style={styles.input}
@@ -159,20 +189,22 @@ function Register() {
               onChange={handleChange}
             />
 
-            <select
-              style={styles.input}
-              name="bloodGroup"
-              required
-              value={form.bloodGroup}
-              onChange={handleChange}
-            >
-              <option value="">Select Blood Group</option>
-              {BLOOD_GROUPS.map((group) => (
-                <option key={group} value={group}>
-                  {group}
-                </option>
-              ))}
-            </select>
+            {form.role !== "hospital" && (
+              <select
+                style={styles.input}
+                name="bloodGroup"
+                required
+                value={form.bloodGroup}
+                onChange={handleChange}
+              >
+                <option value="">Select Blood Group</option>
+                {BLOOD_GROUPS.map((group) => (
+                  <option key={group} value={group}>
+                    {group}
+                  </option>
+                ))}
+              </select>
+            )}
 
             <select
               style={styles.input}

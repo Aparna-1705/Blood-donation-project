@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import API from "../services/api";
 
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
@@ -8,6 +9,8 @@ const NAME_RE = /^[A-Za-z\s.'-]+$/;
 
 const Appointments = () => {
   const user = JSON.parse(localStorage.getItem("user") || "{}");
+  const navigate = useNavigate();
+  const isAdmin = String(user?.role || "").toLowerCase() === "admin";
   const [form, setForm] = useState({
     donorName: String(user?.name || "").trim(),
     donorEmail: String(user?.email || "").trim().toLowerCase(),
@@ -17,6 +20,12 @@ const Appointments = () => {
   });
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+
+  useEffect(() => {
+    if (isAdmin) {
+      navigate("/appointments-list", { replace: true });
+    }
+  }, [isAdmin, navigate]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
